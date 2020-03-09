@@ -1,0 +1,22 @@
+<div class="container">
+    <p class="text-center">Formulário simples sem ação para carregar dinamicamente os paises de uma classe PHP</p>
+    <form method="post">
+        <!-- Name field -->
+        <div class="form-group">
+            <label for="ex6-name">Nome</label>
+            <input type="text" class="form-control" name="ex6-name" id="ex6-name" placeholder="Digite seu nome">
+        </div>
+
+        <div class="form-group">
+            <label for="ex6-countries">Escolha seu país</label>
+            <select class="form-control" id="ex6-countries" name="ex6-countries">
+                {% for country in countries %}
+                    <option>{{ country }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </form>
+</div>
+
+

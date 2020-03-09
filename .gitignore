@@ -1,0 +1,26 @@
+### Generated Files ###
+app/data/registros.txt
+app/data/usuarios.txt
+app/data/xml.csv
+
+### Composer ###
+composer.phar
+app/vendor/
+
+### PhpStorm ###
+
+# User-specific stuff
+.idea/
+
+### PHPUnit ###
+.phpunit.result.cache
+
+### SublimeText ###
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+### VisualStudioCode ###
+.vscode/*
+.history

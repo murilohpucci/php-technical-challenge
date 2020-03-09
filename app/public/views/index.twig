@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>Desafio técnico PHP</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- Custom styles for the project -->
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container pb-5">
+            <header class="blog-header py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-12 text-center">
+                        <h2><a class="blog-header-logo text-dark" href="/">Exercícios PHP</a></h2>
+                    </div>
+                </div>
+            </header>
+
+            <div class="nav-scroller py-1 mb-2">
+                <nav class="nav d-flex justify-content-between">
+                    <a class="p-2 btn btn-dark" href="/ex1">Exercício 1</a>
+                    <a class="p-2 btn btn-dark" href="/ex2">Exercício 2</a>
+                    <a class="p-2 btn btn-dark" href="/ex3">Exercício 3</a>
+                    <a class="p-2 btn btn-dark" href="/ex4">Exercício 4</a>
+                    <a class="p-2 btn btn-dark" href="/ex5">Exercício 5</a>
+                    <a class="p-2 btn btn-dark" href="/ex6">Exercício 6</a>
+                    <a class="p-2 btn btn-dark" href="/ex7">Exercício 7</a>
+                </nav>
+            </div>
+        </div>
+
+        <main role="main" class="container">{% include(content) %}</main>
+    </body>
+</html>

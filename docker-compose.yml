@@ -1,0 +1,35 @@
+version: "3.0"
+services:
+  # PHP Application layer
+  php:
+    image: "php:7.4-alpine"
+    container_name: "php_tecnical_challenge"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./app:/app"
+    depends_on:
+      - composer
+    environment:
+      - DATA_FOLDER=/app/data
+    command: "php -S 0.0.0.0:8080 -t ./app ./app/index.php"
+
+  # Composer service layer
+  composer:
+    image: composer:1.9
+    restart: "no"
+    command: "update --ignore-platform-reqs"
+    volumes:
+      - "./app:/app"
+
+  # Tests service layer
+  tests:
+    image: "php:7.4-alpine"
+    container_name: "php_tecnical_challenge_tests"
+    volumes:
+      - "./app:/app"
+    environment:
+      - DATA_FOLDER=/app/data
+    depends_on:
+      - composer
+    command: "php ./app/vendor/bin/phpunit ./app/tests"

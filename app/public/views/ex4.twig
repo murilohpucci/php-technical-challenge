@@ -1,0 +1,89 @@
+<div class="container">
+    <form method="post">
+        <!-- Name field -->
+        <div class="form-group">
+            <label for="ex4-name">Nome</label>
+            <input type="text" class="form-control" name="ex4-name" id="ex4-name" placeholder="Digite seu nome">
+        </div>
+
+        <!-- Last Name field -->
+        <div class="form-group">
+            <label for="ex4-lastname">Sobrenome</label>
+            <input type="text" class="form-control" name="ex4-lastname" id="ex4-lastname" placeholder="Digite seu sobrenome">
+        </div>
+
+        <!-- Email field -->
+        <div class="form-group">
+            <label for="ex4-email">Email</label>
+            <input type="text" class="form-control" name="ex4-email" id="ex4-email" placeholder="Digite um e-mail válido">
+        </div>
+
+        <!-- Telephone field -->
+        <div class="form-group">
+            <label for="ex4-telephone">Telefone</label>
+            <input type="text" class="form-control" name="ex4-telephone" id="ex4-telephone" placeholder="Ex: (11) 99999-9999">
+        </div>
+
+        <!-- Login field -->
+        <div class="form-group">
+            <label for="ex4-login">Login</label>
+            <input type="text" class="form-control" name="ex4-login" id="ex4-login" placeholder="Digite um login">
+        </div>
+
+        <!-- Password field -->
+        <div class="form-group">
+            <label for="ex4-password">Senha</label>
+            <input type="password" class="form-control" name="ex4-password" id="ex4-password" placeholder="Digite uma senha">
+        </div>
+
+        <!-- Send Button-->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <div class="span"></div>
+
+    {% if success != null %}
+    <div class="alert alert-success" role="alert">
+        {% for success_msg in success %}
+            <p>{{ success_msg }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if errors != null %}
+        <div class="alert alert-danger" role="alert">
+            {% for error_msg in errors %}
+                <p>{{ error_msg }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="span"></div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Login</th>
+            <th scope="col">Senha</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for register in registers %}
+            <tr>
+                <td>{{ register['name'] }}</td>
+                <td>{{ register['last_name'] }}</td>
+                <td>{{ register['email'] }}</td>
+                <td>{{ register['telephone'] }}</td>
+                <td>{{ register['login'] }}</td>
+                <td>{{ register['password'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
