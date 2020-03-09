@@ -97,7 +97,7 @@ class Service
             return $this->response;
         }
 
-        $this->response->setResponseCode(204);
+        $this->response->setResponseCode(202);
         $this->response->setMessage("Usuário excluido com sucesso");
         return $this->response;
     }
@@ -123,7 +123,7 @@ class Service
             return $this->response;
         }
 
-        $this->response->setResponseCode(202);
+        $this->response->setResponseCode(200);
         $this->response->setMessage("Usuário atualizado sucesso");
         return $this->response;
     }

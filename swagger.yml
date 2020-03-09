@@ -1,0 +1,146 @@
+swagger: "2.0"
+info:
+  description: "Essa é uma documentação simples feita especialmente para o exercício 7"
+  version: "1.0.0"
+  title: "User API"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+basePath: "/api/v1"
+tags:
+  - name: "user"
+    description: "Operações do usuário"
+schemes:
+  - "http"
+paths:
+  /user:
+    post:
+      tags:
+        - "user"
+      summary: "Criar usuário"
+      description: "A operação vai salvar o usuário em um arquivo usuarios.txt"
+      operationId: "createUser"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Objeto para criar usuário"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        201:
+          description: "Usuário criado com sucesso"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        422:
+          description: "Dados de usuário ou JSON inválido"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        406:
+          description: "Formato de dados enviado é inválido, somente JSON é aceito"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    get:
+      tags:
+        - "user"
+      summary: "Mostra todos os usuários"
+      description: "A operação vai mostrar todos os usuários salvos em usuarios.txt"
+      operationId: "showUser"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Todos os usuários"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    put:
+      tags:
+        - "user"
+      summary: "Atualizar usuário por e-mail"
+      description: "A operação vai atualizar um usuário com base no e-mail no arquivo usuarios.txt"
+      operationId: "updateUser"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Objeto para atualizar usuário"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Usuário atualizado com sucesso"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        422:
+          description: "Dados de usuário ou JSON inválido"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        406:
+          description: "Formato de dados enviado é inválido, somente JSON é aceito"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    delete:
+      tags:
+        - "user"
+      summary: "Apagar usuário por e-mail"
+      description: "A operação vai apagar usuários com o e-mail enviado do arquivo usuarios.txt"
+      operationId: "deleteUser"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Objeto para deletar usuário por e-mail"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+      responses:
+        202:
+          description: "Usuário apagado com sucesso"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        422:
+          description: "Dados de usuário ou JSON inválido"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        406:
+          description: "Formato de dados enviado é inválido, somente JSON é aceito"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      telephone:
+        type: "string"
+  ApiResponse:
+    type: "object"
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+      message:
+        type: "string"
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/User"
+
+externalDocs:
+  description: "Saiba mais sobre o projeto"
+  url: "https://github.com/murilohpucci/php-technical-challenge"

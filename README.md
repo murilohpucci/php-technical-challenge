@@ -52,7 +52,8 @@ make test
 
 ## Documentação ##
 
-Toda a documentação do projeto está aqui neste **README.md**, para documentar a API usamos o [Swagger](https://swagger.io/).
+Toda a documentação do projeto está aqui neste **README.md**
+A documentação da API foi feita usando o **Swagger** basta importar o arquivo **swagger.yml** no site do [editor](https://editor.swagger.io/) 
 
 ## Enunciados ##
 
