@@ -8,9 +8,6 @@ use App\ex4\Domain\ValueObject\Password;
 
 /**
  * Class PasswordTest.
- *
- * @author Murilo Pucci <murilohpucci@gmail.com>.
- *
  * @covers \App\ex4\Domain\ValueObject\Password
  */
 class PasswordTest extends TestCase
@@ -25,17 +22,7 @@ class PasswordTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe check arguments of this constructor. */
-        $this->password = new Password("a string to test");
-    }
-
-    /**
-     * @covers \App\ex4\Domain\ValueObject\Password::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->password = new Password("1234");
     }
 
     /**
@@ -43,7 +30,7 @@ class PasswordTest extends TestCase
      */
     public function testGet(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $expected = '7110eda4d09e062aa5e4a390b0a572ac0d2c0220';
+        $this->assertEquals($expected, $this->password->get());
     }
 }

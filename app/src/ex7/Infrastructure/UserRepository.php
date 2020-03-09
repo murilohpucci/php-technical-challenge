@@ -20,10 +20,11 @@ class UserRepository implements Repository
 
     /**
      * UserRepository constructor.
+     * @param string $registerPath
      */
-    public function __construct()
+    public function __construct(string $registerPath)
     {
-        $this->registerPath = getenv('DATA_FOLDER') . '/usuarios.txt';
+        $this->registerPath = $registerPath;
         if (!file_exists($this->registerPath)) {
             $registerFile = fopen($this->registerPath, 'w');
             fclose($registerFile);
@@ -88,23 +89,6 @@ class UserRepository implements Repository
         $newUsers = serialize(array_values($allUsers));
         file_put_contents($this->registerPath, $newUsers);
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function get(string $email): array
-    {
-        $allUsers = $this->getAll();
-        $result = [];
-
-        foreach ($allUsers as $user) {
-            if ($user['email'] == $email) {
-                $result[] = $user;
-            }
-        }
-
-        return $result;
     }
 
     /**

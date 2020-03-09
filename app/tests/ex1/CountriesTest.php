@@ -8,9 +8,6 @@ use App\ex1\Countries;
 
 /**
  * Class CountriesTest.
- *
- * @author Murilo Pucci <murilohpucci@gmail.com>.
- *
  * @covers \App\ex1\Countries
  */
 class CountriesTest extends TestCase
@@ -25,17 +22,7 @@ class CountriesTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
         $this->countries = new Countries();
-    }
-
-    /**
-     * @covers \App\ex1\Countries::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
     }
 
     /**
@@ -43,7 +30,14 @@ class CountriesTest extends TestCase
      */
     public function testSortByCapital(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $expected = [
+            'Brasil'    => 'Brasília',
+            'Argentina' => 'Bueno Aires',
+            'Mexico'    => 'Cidade do México',
+            'Espanha'   => 'Madrid',
+            'Japao'     => 'Tóquio',
+            'EUA'       => 'Washington'
+        ];
+        $this->assertEquals($expected, $this->countries->sortByCapital());
     }
 }

@@ -15,26 +15,20 @@ use App\Util\Validators\Email;
  */
 class EmailTest extends TestCase
 {
-    /**
-     * @var Email $email An instance of "Email" to test.
-     */
-    private $email;
 
     /**
-     * {@inheritdoc}
+     * @covers \App\Util\Validators\Email::isValid
      */
-    protected function setUp(): void
+    public function testIsValidEmailIncorrectFormat(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->email = new Email();
+        $this->assertEquals(false, Email::isValid('mario.mario'));
     }
 
     /**
      * @covers \App\Util\Validators\Email::isValid
      */
-    public function testIsValid(): void
+    public function testIsValidEmailCorrectFormat(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertEquals(true, Email::isValid('mario.bros@gmail.com'));
     }
 }

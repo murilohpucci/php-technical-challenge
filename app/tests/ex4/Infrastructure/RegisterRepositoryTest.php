@@ -2,16 +2,15 @@
 
 namespace Test\App\ex4\Infrastructure;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use App\ex4\Domain\ValueObject\Email;
+use App\ex4\Domain\ValueObject\Password;
+use App\ex4\Domain\ValueObject\Telephone;
 use PHPUnit\Framework\TestCase;
 use App\ex4\Infrastructure\RegisterRepository;
 use App\ex4\Domain\Register;
 
 /**
  * Class RegisterRepositoryTest.
- *
- * @author Murilo Pucci <murilohpucci@gmail.com>.
- *
  * @covers \App\ex4\Infrastructure\RegisterRepository
  */
 class RegisterRepositoryTest extends TestCase
@@ -26,17 +25,7 @@ class RegisterRepositoryTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->registerRepository = new RegisterRepository();
-    }
-
-    /**
-     * @covers \App\ex4\Infrastructure\RegisterRepository::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->registerRepository = new RegisterRepository('/tmp/registros.txt');
     }
 
     /**
@@ -44,16 +33,37 @@ class RegisterRepositoryTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $email = new Email('mario.bros@gmail.com');
+        $telephone = new Telephone('(19) 91234-4321');
+        $password = new Password('123');
+        $tmpRegister = new Register('Mario', 'Bros', $email,$telephone, 'ghi', $password);
+        $this->assertEquals(true, $this->registerRepository->save($tmpRegister));
     }
 
     /**
      * @covers \App\ex4\Infrastructure\RegisterRepository::get
+     * @depends testSave
      */
     public function testGet(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $expect = [
+            [
+                'name' => 'Mario',
+                'last_name' => 'Bros',
+                'email' => 'mario.bros@gmail.com',
+                'telephone' => '(19) 91234-4321',
+                'login' => 'ghi',
+                'password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+            ]
+        ];
+        $this->assertEquals($expect, $this->registerRepository->get());
+    }
+
+    /**
+     * Removes created test file
+     */
+    public static function tearDownAfterClass(): void
+    {
+        unlink('/tmp/registros.txt');
     }
 }

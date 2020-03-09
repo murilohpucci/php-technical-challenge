@@ -26,17 +26,7 @@ class UserRepositoryTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->userRepository = new UserRepository();
-    }
-
-    /**
-     * @covers \App\ex7\Infrastructure\UserRepository::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->userRepository = new UserRepository('/tmp/usuarios.txt');
     }
 
     /**
@@ -44,43 +34,54 @@ class UserRepositoryTest extends TestCase
      */
     public function testSave(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $entity = new Entity('Mario', 'Bros', 'mario.bros@gmail.com', '(11) 94321-1234');
+        $this->assertEquals(true, $this->userRepository->save($entity));
     }
 
     /**
      * @covers \App\ex7\Infrastructure\UserRepository::update
+     * @depends testSave
      */
     public function testUpdate(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \App\ex7\Infrastructure\UserRepository::deleteByEmail
-     */
-    public function testDeleteByEmail(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * @covers \App\ex7\Infrastructure\UserRepository::get
-     */
-    public function testGet(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $entity = new Entity('Joao', 'Silva', 'mario.bros@gmail.com', '(11) 94321-1234');
+        $this->assertEquals(true, $this->userRepository->update($entity));
     }
 
     /**
      * @covers \App\ex7\Infrastructure\UserRepository::getAll
+     * @depends testSave
+     * @depends testUpdate
      */
     public function testGetAll(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $expected = [
+            [
+                'name' => 'Joao',
+                'last_name' => 'Silva',
+                'email' => 'mario.bros@gmail.com',
+                'telephone' => '(11) 94321-1234'
+            ]
+        ];
+        $this->assertEquals($expected, $this->userRepository->getAll());
+    }
+
+    /**
+     * @covers \App\ex7\Infrastructure\UserRepository::deleteByEmail
+     * @depends testSave
+     * @depends testUpdate
+     * @depends testGetAll
+     */
+    public function testDeleteByEmail(): void
+    {
+        $this->assertEquals(true, $this->userRepository->deleteByEmail('mario.bros@gmail.com'));
+    }
+
+    /**
+     * Removes created test file
+     */
+    public static function tearDownAfterClass(): void
+    {
+        unlink('/tmp/usuarios.txt');
     }
 }

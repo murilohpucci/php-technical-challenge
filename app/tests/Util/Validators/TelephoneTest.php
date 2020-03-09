@@ -16,25 +16,18 @@ use App\Util\Validators\Telephone;
 class TelephoneTest extends TestCase
 {
     /**
-     * @var Telephone $telephone An instance of "Telephone" to test.
+     * @covers \App\Util\Validators\Telephone::isValid
      */
-    private $telephone;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
+    public function testIsValidIncorrectFormat(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
-        $this->telephone = new Telephone();
+        $this->assertEquals(false, Telephone::isValid('123456'));
     }
 
     /**
      * @covers \App\Util\Validators\Telephone::isValid
      */
-    public function testIsValid(): void
+    public function testIsValidCorrectFormat(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->assertEquals(true, Telephone::isValid('(19) 94321-1234'));
     }
 }

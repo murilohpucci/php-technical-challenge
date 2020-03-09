@@ -21,9 +21,9 @@ class RegisterRepository implements Repository
     /**
      * RegisterRepository constructor.
      */
-    public function __construct()
+    public function __construct(string $registerPath)
     {
-        $this->registerPath = getenv('DATA_FOLDER') . '/registros.txt';
+        $this->registerPath = $registerPath;
         if (!file_exists($this->registerPath)) {
             $registerFile = fopen($this->registerPath, 'w');
             fclose($registerFile);

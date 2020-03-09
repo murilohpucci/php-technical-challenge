@@ -19,7 +19,7 @@ class Show extends Action
      */
     protected function action(): Response
     {
-        return $this->responseJson((new Service(new UserRepository()))->show());
+        return $this->responseJson((new Service(new UserRepository(getenv('DATA_FOLDER') . '/usuarios.txt')))->show());
     }
 
 }

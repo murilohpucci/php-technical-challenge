@@ -2,6 +2,8 @@
 
 namespace Test\App\ex4\Domain;
 
+use App\ex4\Domain\Exception\EmailAlreadyExists;
+use App\ex4\Domain\Exception\LoginAlreadyExists;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use App\ex4\Domain\Service;
@@ -9,9 +11,6 @@ use App\ex4\Domain\Repository;
 
 /**
  * Class ServiceTest.
- *
- * @author Murilo Pucci <murilohpucci@gmail.com>.
- *
  * @covers \App\ex4\Domain\Service
  */
 class ServiceTest extends TestCase
@@ -26,34 +25,71 @@ class ServiceTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe check arguments of this constructor. */
-        $this->service = new Service($this->createMock(Repository::class));
+        $repository = $this->createMock(Repository::class);
+        $repository->method('save')->willReturn(true);
+        $repository->method('get')->willReturn([
+            [
+                'name' => 'João',
+                'last_name' => 'Silva',
+                'email' => 'joao.silva@gmail.com',
+                'telephone' => '(11) 91234-4321',
+                'login' => 'abc',
+                'password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+            ],
+            [
+                'name' => 'Maria',
+                'last_name' => 'Pontes',
+                'email' => 'maria.pontes@gmail.com',
+                'telephone' => '(11) 91234-4321',
+                'login' => 'def',
+                'password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+            ],
+            [
+                'name' => 'Mario',
+                'last_name' => 'Bros',
+                'email' => 'mario.bros@gmail.com',
+                'telephone' => '(19) 91234-4321',
+                'login' => 'ghi',
+                'password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+            ]
+        ]);
+
+        $this->service = new Service($repository);
     }
 
     /**
-     * @covers \App\ex4\Domain\Service::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
-    }
-
-    /**
+     * Tests if login already exists
      * @covers \App\ex4\Domain\Service::register
      */
-    public function testRegister(): void
+    public function testRegisterLoginAlreadyExists(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->expectException(LoginAlreadyExists::class);
+        $data = [
+            'ex4-name' => 'Jonas',
+            'ex4-lastname' => 'Pereira',
+            'ex4-email' => 'jonas.pereira@gmail.com',
+            'ex4-telephone' => '(11) 91234-4321',
+            'ex4-login' => 'def',
+            'ex4-password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+        ];
+        $this->service->register($data);
     }
 
     /**
-     * @covers \App\ex4\Domain\Service::all
+     * Test if e-mail is already registered
+     * @covers \App\ex4\Domain\Service::register
      */
-    public function testAll(): void
+    public function testRegisterEmailAlreadyExists(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $this->expectException(EmailAlreadyExists::class);
+        $data = [
+            'ex4-name' => 'Jonas',
+            'ex4-lastname' => 'Pereira',
+            'ex4-email' => 'mario.bros@gmail.com',
+            'ex4-telephone' => '(11) 91234-4321',
+            'ex4-login' => 'jkl',
+            'ex4-password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef'
+        ];
+        $this->service->register($data);
     }
 }

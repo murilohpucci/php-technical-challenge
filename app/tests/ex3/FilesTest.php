@@ -8,9 +8,6 @@ use App\ex3\Files;
 
 /**
  * Class FilesTest.
- *
- * @author Murilo Pucci <murilohpucci@gmail.com>.
- *
  * @covers \App\ex3\Files
  */
 class FilesTest extends TestCase
@@ -25,17 +22,7 @@ class FilesTest extends TestCase
      */
     protected function setUp(): void
     {
-        /** @todo Maybe add some arguments to this constructor */
         $this->files = new Files();
-    }
-
-    /**
-     * @covers \App\ex3\Files::__construct
-     */
-    public function testConstruct(): void
-    {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
     }
 
     /**
@@ -43,7 +30,7 @@ class FilesTest extends TestCase
      */
     public function testExtensions(): void
     {
-        /** @todo Complete this unit test method. */
-        $this->markTestIncomplete();
+        $expected = ['jpeg', 'mov', 'mp4'];
+        $this->assertEquals($expected, $this->files->extensions());
     }
 }

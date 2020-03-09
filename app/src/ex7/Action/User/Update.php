@@ -27,6 +27,6 @@ class Update extends Action
         }
 
         $data = json_decode($this->request->getBody()->getContents(), true);
-        return $this->responseJson((new Service(new UserRepository()))->update($data));
+        return $this->responseJson((new Service(new UserRepository(getenv('DATA_FOLDER') . '/usuarios.txt')))->update($data));
     }
 }

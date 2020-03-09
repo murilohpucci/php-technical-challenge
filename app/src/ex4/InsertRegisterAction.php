@@ -26,7 +26,7 @@ class InsertRegisterAction extends Action
     public function action(): Response
     {
         try {
-            $service = new Service(new RegisterRepository());
+            $service = new Service(new RegisterRepository(getenv('DATA_FOLDER') . '/registros.txt'));
             $postData = $this->request->getParsedBody();
             $this->validatePostData($postData);
 

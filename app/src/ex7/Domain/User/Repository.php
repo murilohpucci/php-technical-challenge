@@ -31,13 +31,6 @@ interface Repository
     public function deleteByEmail(string $email): bool;
 
     /**
-     * Get user by email
-     * @param string $email
-     * @return array
-     */
-    public function get(string $email): array;
-
-    /**
      * Return all users as an array of Users
      * @return array
      */
